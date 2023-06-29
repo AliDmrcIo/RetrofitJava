@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.ali.retrofitjava"
+        minSdk 28
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def retrofitVersion = '2.3.0'//bunlar da projemizdeki son versiyon için gerekli
+def rxJavaVersion = '2.1.1'
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"//bu ve buradan aşağısı bu proje için gerekli
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion" //bu; normalde yaptığımız parse işlemi(bir veritipini diğerine dönüşürme işleminin otomatik yapılması için örneğin json->Integer, String şeklinde dönüşümler yapılması için yani)
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion" //Retrofit'i RxJava ile kullanabilmek için lazım bu. RxJava Xtention'u bu.
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion" //RxJava bu
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion" //RxJava'nın android ile birlikte çalışabilmesi için lazım bu
+    implementation 'androidx.recyclerview:recyclerview:1.3.0' //RecyclerView kullanmak için
+    //https://square.github.io/retrofit/     bu adresten bakabilirdik bu bilgilere
+}
